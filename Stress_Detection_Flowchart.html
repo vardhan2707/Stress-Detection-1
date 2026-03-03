@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Detection AI — Implementation Flowchart</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e8e8e8;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1f2e;
+            font-size: 1.8rem;
+        }
+        .flowchart {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .node {
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 320px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .node.sub {
+            font-size: 12px;
+            color: #555;
+            margin-top: 4px;
+        }
+        .arrow { width: 3px; height: 25px; background: #333; margin: 0 auto; }
+        .arrow.branch { height: 20px; }
+        .oval {
+            border-radius: 50px;
+            padding: 12px 40px;
+        }
+        .green { background: #b8e6b8; border: 2px solid #5cb85c; }
+        .blue { background: #c8d8f0; border: 2px solid #5bc0de; }
+        .yellow { background: #fff3cd; border: 2px solid #f0ad4e; }
+        .branch-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .branch-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .branch-node {
+            min-width: 200px;
+            padding: 12px 16px;
+        }
+        .img-box {
+            padding: 16px;
+            margin-top: 12px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        .img-box img {
+            max-width: 100%;
+            height: auto;
+            max-height: 220px;
+            object-fit: contain;
+            display: block;
+        }
+        .converge { width: 3px; height: 20px; background: #333; margin: 0 auto; }
+        .section-label { font-size: 11px; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <h1>IMPLEMENTATION — Stress Detection AI Flowchart</h1>
+
+    <div class="flowchart">
+        <!-- Start -->
+        <div class="node oval green">Start</div>
+        <div class="arrow"></div>
+
+        <!-- Input -->
+        <div class="node green">
+            Input: Physiological Data
+            <div class="node sub">HR (Heart Rate), RMSSD (HRV), SCL (Skin Conductance)</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Process 1 -->
+        <div class="node blue">
+            Process 1: Data Preprocessing
+            <div class="node sub">Handle NaN/inf, validate input range</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Process 2 -->
+        <div class="node blue">
+            Process 2: Feature Scaling (StandardScaler)
+            <div class="node sub">Scale HR, RMSSD, SCL as per training</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Model -->
+        <div class="node blue">
+            Stress Detection Model (RandomForest)
+            <div class="node sub">model.predict_proba → stress probability %</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Branch: Stress Classification -->
+        <div class="branch-row">
+            <div class="branch-col">
+                <div class="node blue branch-node">No Stress<br><span class="node sub">&lt; 40%</span></div>
+            </div>
+            <div class="branch-col">
+                <div class="node blue branch-node">Moderate Stress<br><span class="node sub">40–60%</span></div>
+            </div>
+            <div class="branch-col">
+                <div class="node blue branch-node">High Stress<br><span class="node sub">&gt; 60%</span></div>
+            </div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Output -->
+        <div class="node green">
+            Output: Stress Level + Probability
+            <div class="node sub">Category, Confidence %, Recommendations</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Visualization with Image -->
+        <div class="node yellow">
+            Visualization: Streamlit Dashboard
+            <div class="node sub">Stress gauge, probability bars, feature contributions</div>
+            <div class="img-box">
+                <img src="flowchart_images/stress_predict_ui.png" alt="Predict Stress UI">
+            </div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Deployment 1 -->
+        <div class="node green">
+            Deployment: Web Interface
+            <div class="node sub">Streamlit app with login, navigation</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Integration with Image -->
+        <div class="node blue">
+            Web Interface Integration
+            <div class="node sub">Long-Term Analytics, charts, sleep predictor</div>
+            <div class="img-box">
+                <img src="flowchart_images/stress_analytics_dashboard.png" alt="Analytics Dashboard">
+            </div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- Deployment 2 -->
+        <div class="node green">
+            Deployment: Web Interface
+            <div class="node sub">Local CSV persistence, real-time prediction</div>
+        </div>
+        <div class="arrow"></div>
+
+        <!-- End -->
+        <div class="node oval green">End</div>
+    </div>
+
+    <p style="text-align: center; margin-top: 30px; color: #666; font-size: 13px;">
+        Stress Detection AI — Personalized ML for Stress Detection
+    </p>
+</body>
+</html>
